@@ -1,9 +1,11 @@
 package Unidata;
 
-public abstract class NGUDCustomTableFieldKind {
+import Uniwork.Base.NGObject;
+
+public abstract class NGUDCustomTableFieldKind extends NGObject {
 
     public NGUDCustomTableFieldKind() {
-
+        super();
     }
 
 }
