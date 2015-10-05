@@ -1,4 +1,4 @@
-package Unidata;
+package Unidata.DataDictonary;
 
 import Uniwork.Base.NGObject;
 
