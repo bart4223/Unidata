@@ -1,4 +1,4 @@
-package Unidata.DataDictonary;
+package Unidata.Dictionary;
 
 import Uniwork.Base.NGObject;
 
@@ -7,11 +7,17 @@ import java.util.Iterator;
 
 public class NGUDTableDefinition extends NGObject {
 
+    protected String FName;
     protected ArrayList<NGUDCustomTableFieldDefinition> FFieldDefinitions;
 
-    public NGUDTableDefinition() {
+    public NGUDTableDefinition(String aName) {
         super();
+        FName = aName;
         FFieldDefinitions = new ArrayList<>();
+    }
+
+    public String getName() {
+        return FName;
     }
 
     public Iterator<NGUDCustomTableFieldDefinition> getFieldDefinitions() {

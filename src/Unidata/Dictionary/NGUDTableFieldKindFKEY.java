@@ -1,4 +1,4 @@
-package Unidata.DataDictonary;
+package Unidata.Dictionary;
 
 public class NGUDTableFieldKindFKEY extends NGUDCustomTableFieldKind {
 
