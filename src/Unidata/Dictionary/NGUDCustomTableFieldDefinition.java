@@ -1,5 +1,6 @@
 package Unidata.Dictionary;
 
+import Unidata.Kernel.NGUDCustomTableField;
 import Uniwork.Base.NGObject;
 
 public abstract class NGUDCustomTableFieldDefinition extends NGObject {
@@ -31,6 +32,10 @@ public abstract class NGUDCustomTableFieldDefinition extends NGObject {
 
     public String getName() {
         return FName;
+    }
+
+    public Class getFieldClass() {
+        return null;
     }
 
 }

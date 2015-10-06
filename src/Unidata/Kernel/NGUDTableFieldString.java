@@ -4,6 +4,10 @@ import Unidata.Dictionary.NGUDTableFieldDefinitionString;
 
 public class NGUDTableFieldString extends NGUDCustomTableField {
 
+    public NGUDTableFieldString(NGUDTableFieldDefinitionString aDefinition) {
+        this(aDefinition, "");
+    }
+
     public NGUDTableFieldString(NGUDTableFieldDefinitionString aDefinition, String aValue) {
         super(aDefinition);
         setValue(aValue);

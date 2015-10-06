@@ -7,3 +7,4 @@ Source History
 ==============
 
     05.10.15    Start implementation with data dictionary
+    06.10.15    Database Manager
