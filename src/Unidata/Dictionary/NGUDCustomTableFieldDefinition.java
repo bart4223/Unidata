@@ -1,6 +1,5 @@
 package Unidata.Dictionary;
 
-import Unidata.Kernel.NGUDCustomTableField;
 import Uniwork.Base.NGObject;
 
 public abstract class NGUDCustomTableFieldDefinition extends NGObject {
