@@ -77,7 +77,7 @@ public class NGUDDataDictionary extends NGComponent {
         NGUDTableDefinition res = new NGUDTableDefinition(aName);
         res.addFieldDefinition(new NGUDTableFieldDefinitionPKEY());
         FTableDefinitions.add(res);
-        writeInfo(String.format("Table definition [%s] added", res.getName()));
+        writeInfo(String.format("Table definition [%s] added.", res.getName()));
         return res;
     }
 
