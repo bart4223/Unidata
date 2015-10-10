@@ -123,4 +123,8 @@ public class NGUDTable extends NGObject {
         return FLoaded;
     }
 
+    public Iterator<NGUDTableRecord> getRecords() {
+        return FRecords.iterator();
+    }
+
 }

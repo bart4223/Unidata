@@ -53,7 +53,7 @@ public class NGUDDataDictionary extends NGComponent {
             ser.setLogManager(FLogManager);
             ser.serializeObject();
         }
-        writeInfo("Data Dictionary saved.");
+        writeInfo("Data Dictionary stored.");
     }
 
     protected NGUDTableDefinition addTableDefinition(String aName, String aCaption, Boolean aAddPKEYDefinition) {

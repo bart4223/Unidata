@@ -9,6 +9,8 @@ import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogManager;
 import Uniwork.Misc.NGMisc;
 
+import java.util.Iterator;
+
 public class NGUnidataApplicationModule extends NGNonVisualApplicationModule implements NGUnidataAPI {
 
     protected NGUDDataDictionary FDataDictionary;
@@ -45,6 +47,11 @@ public class NGUnidataApplicationModule extends NGNonVisualApplicationModule imp
     @Override
     public NGUDTableRecord newRecord(String aName) {
         return FDatabaseManager.newRecord(aName);
+    }
+
+    @Override
+    public Iterator<NGUDTableRecord> getRecords(String aName) {
+        return FDatabaseManager.getRecords(aName);
     }
 
 }

@@ -100,4 +100,9 @@ public class NGUDDatabaseManager extends NGComponent {
         return table.newRecord();
     }
 
+    public Iterator<NGUDTableRecord> getRecords(String aName) {
+        NGUDTable table = getTable(aName);
+        return table.getRecords();
+    }
+
 }

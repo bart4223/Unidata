@@ -3,6 +3,8 @@ package Unidata;
 import Unidata.Dictionary.NGUDTableDefinition;
 import Unidata.Kernel.NGUDTableRecord;
 
+import java.util.Iterator;
+
 public interface NGUnidataAPI {
 
     // Dictionary
@@ -10,5 +12,6 @@ public interface NGUnidataAPI {
 
     // Database
     NGUDTableRecord newRecord(String aName);
+    Iterator<NGUDTableRecord> getRecords(String aName);
 
 }
