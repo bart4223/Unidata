@@ -21,7 +21,7 @@ public class NGUDTableRecord extends NGObject {
         while (itr.hasNext()) {
             NGUDCustomTableFieldDefinition fieldDef = itr.next();
             try {
-                NGUDCustomTableField field = (NGUDCustomTableField)fieldDef.getFieldClass().getConstructor(NGUDCustomTableFieldDefinition.class).newInstance(fieldDef);
+                NGUDCustomTableField field = (NGUDCustomTableField)fieldDef.getFieldClass().getConstructor(fieldDef.getClass()).newInstance(fieldDef);
                 addField(field);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -38,6 +38,28 @@ public class NGUDTableRecord extends NGObject {
 
     public NGUDTableDefinition getDefinition() {
         return FDefinition;
+    }
+
+    public Iterator<NGUDCustomTableField> getFields() {
+        return FFields.iterator();
+    }
+
+    public NGUDCustomTableField getField(String aName) {
+        for (NGUDCustomTableField field : FFields) {
+            if (field.getName().equals(aName))
+                return field;
+        }
+        return null;
+    }
+
+    public void setFieldValue(String aName, Object aValue) {
+        NGUDCustomTableField field = getField(aName);
+        field.setValue(aValue);
+    }
+
+    public Object getFieldValue(String aName) {
+        NGUDCustomTableField field = getField(aName);
+        return field.getValue();
     }
 
 }

@@ -3,12 +3,11 @@ package Unidata;
 import Unidata.Dictionary.NGUDTableDefinition;
 import Unidata.Kernel.NGUDDataDictionary;
 import Unidata.Kernel.NGUDDatabaseManager;
+import Unidata.Kernel.NGUDTableRecord;
 import Uniwork.Appl.NGNonVisualApplicationModule;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGLogManager;
 import Uniwork.Misc.NGMisc;
-
-import java.nio.file.Paths;
 
 public class NGUnidataApplicationModule extends NGNonVisualApplicationModule implements NGUnidataAPI {
 
@@ -39,8 +38,13 @@ public class NGUnidataApplicationModule extends NGNonVisualApplicationModule imp
     }
 
     @Override
-    public NGUDTableDefinition addTableDefinition(String aName) {
-        return FDataDictionary.addTableDefinition(aName);
+    public NGUDTableDefinition addTableDefinition(String aName, String aCaption) {
+        return FDataDictionary.addTableDefinition(aName, aCaption);
+    }
+
+    @Override
+    public NGUDTableRecord newRecord(String aName) {
+        return FDatabaseManager.newRecord(aName);
     }
 
 }

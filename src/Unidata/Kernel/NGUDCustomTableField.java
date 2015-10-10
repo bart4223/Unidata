@@ -26,4 +26,12 @@ public abstract class NGUDCustomTableField extends NGObject {
         return FValue;
     }
 
+    public String getName() {
+        return FDefinition.getName();
+    }
+
+    public String GetAsString() {
+        return FValue.toString();
+    }
+
 }

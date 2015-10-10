@@ -13,6 +13,7 @@ public class NGUDTableFieldPKEY extends NGUDCustomTableField {
 
     @Override
     public void setValue(Object aValue) {
+        FValue = aValue;
     }
 
     @Override

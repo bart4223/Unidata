@@ -20,7 +20,7 @@ public class NGUDDataDictionary extends NGComponent {
             Deserializer.setLogManager(FLogManager);
             Deserializer.deserializeObject();
             NGUDTableSchema schema = (NGUDTableSchema)Deserializer.getTarget();
-            NGUDTableDefinition tabledef = addTableDefinition(schema.getName());
+            NGUDTableDefinition tabledef = addTableDefinition(schema.getName(), schema.getCaption(), false);
             for (NGUDTableFieldSchema fieldSchema : schema.getFields()) {
                 try {
                     NGUDCustomTableFieldDefinition fieldDef = (NGUDCustomTableFieldDefinition)getClass().getClassLoader().loadClass(fieldSchema.getClassName()).getConstructor(Integer.class, String.class).newInstance(fieldSchema.getIndex(), fieldSchema.getName());
@@ -37,6 +37,7 @@ public class NGUDDataDictionary extends NGComponent {
         for (NGUDTableDefinition tableDef : FTableDefinitions) {
             NGUDTableSchema schema = new NGUDTableSchema();
             schema.setName(tableDef.getName());
+            schema.setCaption(tableDef.getCaption());
             schema.setFields(new ArrayList<NGUDTableFieldSchema>());
             ArrayList<NGUDTableFieldSchema> fieldSchemas = schema.getFields();
             Iterator<NGUDCustomTableFieldDefinition> itr = tableDef.getFieldDefinitions();
@@ -53,6 +54,15 @@ public class NGUDDataDictionary extends NGComponent {
             ser.serializeObject();
         }
         writeInfo("Data Dictionary saved.");
+    }
+
+    protected NGUDTableDefinition addTableDefinition(String aName, String aCaption, Boolean aAddPKEYDefinition) {
+        NGUDTableDefinition res = new NGUDTableDefinition(aName, aCaption);
+        if (aAddPKEYDefinition)
+            res.addFieldDefinition(new NGUDTableFieldDefinitionPKEY());
+        FTableDefinitions.add(res);
+        writeInfo(String.format("Table definition %s[%s] added.", res.getCaption(), res.getName()));
+        return res;
     }
 
     @Override
@@ -73,12 +83,20 @@ public class NGUDDataDictionary extends NGComponent {
         FDatabasePath = "";
     }
 
-    public NGUDTableDefinition addTableDefinition(String aName) {
-        NGUDTableDefinition res = new NGUDTableDefinition(aName);
-        res.addFieldDefinition(new NGUDTableFieldDefinitionPKEY());
-        FTableDefinitions.add(res);
-        writeInfo(String.format("Table definition [%s] added.", res.getName()));
-        return res;
+    public NGUDTableDefinition addTableDefinition(String aName, String aCaption) {
+        return addTableDefinition(aName, aCaption, true);
+    }
+
+    public NGUDTableDefinition getTableDefinition(String aName) {
+        for (NGUDTableDefinition tableDef : FTableDefinitions) {
+            if (tableDef.getName().equals(aName))
+                return tableDef;
+        }
+        return null;
+    }
+
+    public Iterator<NGUDTableDefinition> getTableDefinitions() {
+        return FTableDefinitions.iterator();
     }
 
     public void setDatabasePath(String aDatabasePath) {

@@ -8,16 +8,22 @@ import java.util.Iterator;
 public class NGUDTableDefinition extends NGObject {
 
     protected String FName;
+    protected String FCaption;
     protected ArrayList<NGUDCustomTableFieldDefinition> FFieldDefinitions;
 
-    public NGUDTableDefinition(String aName) {
+    public NGUDTableDefinition(String aName, String aCaption) {
         super();
         FName = aName;
+        FCaption = aCaption;
         FFieldDefinitions = new ArrayList<>();
     }
 
     public String getName() {
         return FName;
+    }
+
+    public String getCaption() {
+        return FCaption;
     }
 
     public Iterator<NGUDCustomTableFieldDefinition> getFieldDefinitions() {
