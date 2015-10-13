@@ -8,4 +8,8 @@ public abstract class NGUDCustomTableFieldType extends NGObject {
         super();
     }
 
+    public String getDescription() {
+        return "";
+    }
+
 }

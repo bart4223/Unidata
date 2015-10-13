@@ -6,4 +6,9 @@ public class NGUDTableFieldTypeBoolean extends NGUDCustomTableFieldType {
         super();
     }
 
+    @Override
+    public String getDescription() {
+        return "Boolean";
+    }
+
 }

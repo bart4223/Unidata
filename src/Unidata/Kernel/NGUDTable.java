@@ -80,12 +80,10 @@ public class NGUDTable extends NGObject {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 FLoaded = true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

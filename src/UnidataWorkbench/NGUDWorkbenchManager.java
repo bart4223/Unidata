@@ -10,6 +10,7 @@ import Unigraph.Visuals.NGUG2DDiagramLayer;
 import Unigraph.Visuals.NGUG2DTableDiagramObjectLayout;
 import Uniwork.Appl.NGApplication;
 import Uniwork.Base.NGComponent;
+import Uniwork.Graphics.NGPoint2D;
 import javafx.scene.paint.Color;
 
 public class NGUDWorkbenchManager extends NGComponent implements NGUDDataDictionaryEventListener {
@@ -17,6 +18,7 @@ public class NGUDWorkbenchManager extends NGComponent implements NGUDDataDiction
     protected NGUnidataAPI FUDAPI;
     protected NGUnigraph2DAPI FUGAPI;
     protected NGUG2DDiagramLayer FLayerTable;
+    protected NGPoint2D FCurrentPos;
 
     @Override
     protected void DoInitialize() {
@@ -36,7 +38,9 @@ public class NGUDWorkbenchManager extends NGComponent implements NGUDDataDiction
 
     public NGUDWorkbenchManager(NGComponent aOwner, String aName) {
         super(aOwner, aName);
+        FCurrentPos = new NGPoint2D(100.0, 130.0);
         FUGAPI = null;
+        FUDAPI = null;
     }
 
     @Override
@@ -44,8 +48,9 @@ public class NGUDWorkbenchManager extends NGComponent implements NGUDDataDiction
         if (FUGAPI != null) {
             NGUGTableDiagramObject table = FUGAPI.addTable(e.getTableDefinition().getName(), e.getTableDefinition());
             NGUG2DTableDiagramObjectLayout tableLayout = FUGAPI.addTableLayout(table, FLayerTable, 120, 180);
-            tableLayout.setObjectColor(Color.LIGHTGREEN);
-            tableLayout.setPosition(100.0, 130.0);
+            tableLayout.setObjectColor(Color.LIGHTBLUE);
+            tableLayout.setPosition(FCurrentPos.getX(), FCurrentPos.getY());
+            FCurrentPos.setX(FCurrentPos.getX() + 160);
             FUGAPI.Refresh();
         }
     }
@@ -53,7 +58,9 @@ public class NGUDWorkbenchManager extends NGComponent implements NGUDDataDiction
     @Override
     public void handleTableFieldDefinitionAdded(NGUDTableFieldDefinitionEvent e) {
         if (FUGAPI != null) {
-            //FUGAPI.
+            NGUGTableDiagramObject table = (NGUGTableDiagramObject)FUGAPI.getObjectByRef(e.getTableDefinition());
+            table.addField(String.format("%s (%s)",e.getFieldDefinition().getName(), e.getFieldDefinition().getType().getDescription()));
+            FUGAPI.Refresh();
         }
     }
 

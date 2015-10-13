@@ -6,4 +6,9 @@ public class NGUDTableFieldTypeString extends NGUDCustomTableFieldType {
         super();
     }
 
+    @Override
+    public String getDescription() {
+        return "String";
+    }
+
 }

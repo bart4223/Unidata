@@ -6,4 +6,9 @@ public class NGUDTableFieldTypeDouble extends NGUDCustomTableFieldType {
         super();
     }
 
+    @Override
+    public String getDescription() {
+        return "Double";
+    }
+
 }

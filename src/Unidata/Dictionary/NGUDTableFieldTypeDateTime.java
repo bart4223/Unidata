@@ -6,4 +6,9 @@ public class NGUDTableFieldTypeDateTime extends NGUDCustomTableFieldType {
         super();
     }
 
+    @Override
+    public String getDescription() {
+        return "DateTime";
+    }
+
 }
