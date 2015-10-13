@@ -8,10 +8,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class NGUDDataDictionary extends NGComponent {
+public class NGUDDataDictionary extends NGComponent implements NGUDTableDefinitionEventListener {
 
     protected ArrayList<NGUDTableDefinition> FTableDefinitions;
     protected String FDatabasePath;
+    protected ArrayList<NGUDDataDictionaryEventListener> FEventListeners;
 
     protected void LoadDictionary() {
         File directory = new File(FDatabasePath);
@@ -56,11 +57,27 @@ public class NGUDDataDictionary extends NGComponent {
         writeInfo("Data Dictionary stored.");
     }
 
+    protected synchronized void raiseTableDefinitionAddedEvent(NGUDTableDefinition aTableDefinition) {
+        NGUDTableDefinitionEvent event = new NGUDTableDefinitionEvent(aTableDefinition);
+        for (NGUDDataDictionaryEventListener listener : FEventListeners) {
+            listener.handleTableDefinitionAdded(event);
+        }
+    }
+
+    protected synchronized void raiseTableFieldDefinitionAddedEvent(NGUDTableDefinition aTableDefinition, NGUDCustomTableFieldDefinition aFieldDefinition) {
+        NGUDTableFieldDefinitionEvent event = new NGUDTableFieldDefinitionEvent(aTableDefinition, aFieldDefinition);
+        for (NGUDDataDictionaryEventListener listener : FEventListeners) {
+            listener.handleTableFieldDefinitionAdded(event);
+        }
+    }
+
     protected NGUDTableDefinition addTableDefinition(String aName, String aCaption, Boolean aAddPKEYDefinition) {
         NGUDTableDefinition res = new NGUDTableDefinition(aName, aCaption);
+        res.addEventListener(this);
         if (aAddPKEYDefinition)
             res.addFieldDefinition(new NGUDTableFieldDefinitionPKEY());
         FTableDefinitions.add(res);
+        raiseTableDefinitionAddedEvent(res);
         writeInfo(String.format("Table definition %s[%s] added.", res.getCaption(), res.getName()));
         return res;
     }
@@ -80,6 +97,7 @@ public class NGUDDataDictionary extends NGComponent {
     public NGUDDataDictionary(NGComponent aOwner, String aName) {
         super(aOwner, aName);
         FTableDefinitions = new ArrayList<>();
+        FEventListeners = new ArrayList<>();
         FDatabasePath = "";
     }
 
@@ -105,6 +123,19 @@ public class NGUDDataDictionary extends NGComponent {
 
     public String getDatabasePath() {
         return FDatabasePath;
+    }
+
+    public void addEventListener(NGUDDataDictionaryEventListener aListener)  {
+        FEventListeners.add(aListener);
+    }
+
+    public void removeEventListener(NGUDDataDictionaryEventListener aListener)   {
+        FEventListeners.remove(aListener);
+    }
+
+    @Override
+    public void handleFieldDefinitionAdded(NGUDTableFieldDefinitionEvent e) {
+        raiseTableFieldDefinitionAddedEvent(e.getTableDefinition(), e.getFieldDefinition());
     }
 
 }

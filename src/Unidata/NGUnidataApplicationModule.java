@@ -2,11 +2,11 @@ package Unidata;
 
 import Unidata.Dictionary.NGUDTableDefinition;
 import Unidata.Kernel.NGUDDataDictionary;
+import Unidata.Kernel.NGUDDataDictionaryEventListener;
 import Unidata.Kernel.NGUDDatabaseManager;
 import Unidata.Kernel.NGUDTableRecord;
 import Uniwork.Appl.NGNonVisualApplicationModule;
 import Uniwork.Base.NGComponent;
-import Uniwork.Misc.NGLogManager;
 import Uniwork.Misc.NGMisc;
 
 import java.util.Iterator;
@@ -25,6 +25,7 @@ public class NGUnidataApplicationModule extends NGNonVisualApplicationModule imp
 
     public NGUnidataApplicationModule(NGComponent aOwner, String aName) {
         super(aOwner, aName);
+        FDescription = "Unidata Database";
         FDataDictionary = new NGUDDataDictionary(this, "DataDictionary");
         FComponentManager.registerComponent(FDataDictionary);
         FDatabaseManager = new NGUDDatabaseManager(this, "DatabaseManager");
@@ -33,10 +34,13 @@ public class NGUnidataApplicationModule extends NGNonVisualApplicationModule imp
     }
 
     @Override
-    public void setLogManager(NGLogManager aLogManager) {
-        super.setLogManager(aLogManager);
-        FDataDictionary.setLogManager(aLogManager);
-        FDatabaseManager.setLogManager(aLogManager);
+    public void addDataDictionaryEventListener(NGUDDataDictionaryEventListener aEventListener) {
+        FDataDictionary.addEventListener(aEventListener);
+    }
+
+    @Override
+    public void removeDataDictionaryEventListener(NGUDDataDictionaryEventListener aEventListener) {
+        FDataDictionary.removeEventListener(aEventListener);
     }
 
     @Override

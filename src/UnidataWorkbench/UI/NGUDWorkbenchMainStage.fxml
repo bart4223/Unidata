@@ -1,0 +1,8 @@
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane fx:controller="UnidataWorkbench.UI.NGUDWorkbenchMainController" xmlns:fx="http://javafx.com/fxml" >
+    <VBox prefHeight="800" minWidth="200" alignment="TOP_LEFT" spacing="10" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: gray;">
+        <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+    </VBox>
+</AnchorPane>
