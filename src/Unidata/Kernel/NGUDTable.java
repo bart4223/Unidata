@@ -108,12 +108,10 @@ public class NGUDTable extends NGObject {
                     i++;
                 }
             } catch (Exception e) {
-                e.printStackTrace();
             } finally {
                 writer.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

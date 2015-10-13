@@ -10,3 +10,4 @@ Source History
     06.10.15    Database Manager
     09.10.15    Load/Save Data Dictionary
     10.10.15    Load/Store Database
+    14.10.15    First workbench schema diagram
