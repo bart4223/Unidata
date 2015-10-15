@@ -3,6 +3,7 @@ package Unidata.Kernel;
 import Unidata.Dictionary.NGUDCustomTableFieldDefinition;
 import Unidata.Dictionary.NGUDTableDefinition;
 import Uniwork.Base.NGObject;
+import Uniwork.Misc.NGStrings;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -60,6 +61,19 @@ public class NGUDTableRecord extends NGObject {
     public Object getFieldValue(String aName) {
         NGUDCustomTableField field = getField(aName);
         return field.getValue();
+    }
+
+    public String getAsString() {
+        return getAsString(true);
+    }
+
+    public String getAsString(Boolean aWithPKEY) {
+        String res = "";
+        for (NGUDCustomTableField field : FFields) {
+            if (aWithPKEY || !(field instanceof NGUDTableFieldPKEY))
+                res = NGStrings.addString(res, field.GetAsString(), ",");
+        }
+        return res;
     }
 
 }
