@@ -95,16 +95,8 @@
   
   <!-- Project Libraries -->
   
-  <path id="library.ant.classpath">
-    <pathelement location="${idea.home}/lib/ant/lib/ant.jar"/>
-  </path>
-  
-  <path id="library.hamcrest-core-1.3.classpath">
-    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
-  </path>
-  
-  <path id="library.junit-4.12.classpath">
-    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+  <path id="library.uniwork.classpath">
+    <pathelement location="${basedir}/../Uniwork/out/artifacts/Uniwork_jar/Uniwork.jar"/>
   </path>
   <!-- Register Custom Compiler Taskdefs -->
   <property name="javac2.home" value="${idea.home}/lib"/>
@@ -120,195 +112,6 @@
   </target>
   
   <!-- Modules -->
-  
-  
-  <!-- Module Uniwork -->
-  
-  <dirname property="module.uniwork.basedir" file="${ant.file}"/>
-  
-  
-  <property name="module.jdk.home.uniwork" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.uniwork" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.uniwork" value="${project.jdk.classpath}"/>
-  
-  <property name="compiler.args.uniwork" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
-  
-  <property name="uniwork.output.dir" value="${module.uniwork.basedir}/out/production/Uniwork"/>
-  <property name="uniwork.testoutput.dir" value="${module.uniwork.basedir}/out/test/Uniwork"/>
-  
-  <path id="uniwork.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
-  </path>
-  
-  <path id="uniwork.module.production.classpath">
-    <path refid="${module.jdk.classpath.uniwork}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  <path id="uniwork.runtime.production.module.classpath">
-    <pathelement location="${uniwork.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  <path id="uniwork.module.classpath">
-    <path refid="${module.jdk.classpath.uniwork}"/>
-    <pathelement location="${uniwork.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  <path id="uniwork.runtime.module.classpath">
-    <pathelement location="${uniwork.testoutput.dir}"/>
-    <pathelement location="${uniwork.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  
-  <patternset id="excluded.from.module.uniwork">
-    <patternset refid="ignored.files"/>
-  </patternset>
-  
-  <patternset id="excluded.from.compilation.uniwork">
-    <patternset refid="excluded.from.module.uniwork"/>
-  </patternset>
-  
-  <path id="uniwork.module.sourcepath">
-    <dirset dir="${module.uniwork.basedir}/../Uniwork">
-      <include name="src"/>
-    </dirset>
-  </path>
-  
-  
-  <target name="compile.module.uniwork" depends="compile.module.uniwork.production,compile.module.uniwork.tests" description="Compile module Uniwork"/>
-  
-  <target name="compile.module.uniwork.production" depends="register.custom.compilers" description="Compile module Uniwork; production classes">
-    <mkdir dir="${uniwork.output.dir}"/>
-    <javac2 destdir="${uniwork.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.uniwork}/javac">
-      <compilerarg line="${compiler.args.uniwork}"/>
-      <bootclasspath refid="uniwork.module.bootclasspath"/>
-      <classpath refid="uniwork.module.production.classpath"/>
-      <src refid="uniwork.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.uniwork"/>
-    </javac2>
-    
-    <copy todir="${uniwork.output.dir}">
-      <fileset dir="${module.uniwork.basedir}/../Uniwork/src">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="compile.module.uniwork.tests" depends="register.custom.compilers,compile.module.uniwork.production" description="compile module Uniwork; test classes" unless="skip.tests"/>
-  
-  <target name="clean.module.uniwork" description="cleanup module">
-    <delete dir="${uniwork.output.dir}"/>
-    <delete dir="${uniwork.testoutput.dir}"/>
-  </target>
-  
-  
-  <!-- Module Unigraph -->
-  
-  <dirname property="module.unigraph.basedir" file="${ant.file}"/>
-  
-  
-  <property name="module.jdk.home.unigraph" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.unigraph" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.unigraph" value="${project.jdk.classpath}"/>
-  
-  <property name="compiler.args.unigraph" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
-  
-  <property name="unigraph.output.dir" value="${module.unigraph.basedir}/out/production/Unigraph"/>
-  <property name="unigraph.testoutput.dir" value="${module.unigraph.basedir}/out/test/Unigraph"/>
-  
-  <path id="unigraph.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
-  </path>
-  
-  <path id="unigraph.module.production.classpath">
-    <path refid="${module.jdk.classpath.unigraph}"/>
-    <pathelement location="${uniwork.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  <path id="unigraph.runtime.production.module.classpath">
-    <pathelement location="${unigraph.output.dir}"/>
-    <path refid="uniwork.runtime.production.module.classpath"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  <path id="unigraph.module.classpath">
-    <path refid="${module.jdk.classpath.unigraph}"/>
-    <pathelement location="${unigraph.output.dir}"/>
-    <pathelement location="${uniwork.testoutput.dir}"/>
-    <pathelement location="${uniwork.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  <path id="unigraph.runtime.module.classpath">
-    <pathelement location="${unigraph.testoutput.dir}"/>
-    <pathelement location="${unigraph.output.dir}"/>
-    <path refid="uniwork.runtime.module.classpath"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
-  </path>
-  
-  
-  <patternset id="excluded.from.module.unigraph">
-    <patternset refid="ignored.files"/>
-  </patternset>
-  
-  <patternset id="excluded.from.compilation.unigraph">
-    <patternset refid="excluded.from.module.unigraph"/>
-  </patternset>
-  
-  <path id="unigraph.module.sourcepath">
-    <dirset dir="${module.unigraph.basedir}/../Unigraph">
-      <include name="src"/>
-    </dirset>
-  </path>
-  
-  
-  <target name="compile.module.unigraph" depends="compile.module.unigraph.production,compile.module.unigraph.tests" description="Compile module Unigraph"/>
-  
-  <target name="compile.module.unigraph.production" depends="register.custom.compilers,compile.module.uniwork" description="Compile module Unigraph; production classes">
-    <mkdir dir="${unigraph.output.dir}"/>
-    <javac2 destdir="${unigraph.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.unigraph}/javac">
-      <compilerarg line="${compiler.args.unigraph}"/>
-      <bootclasspath refid="unigraph.module.bootclasspath"/>
-      <classpath refid="unigraph.module.production.classpath"/>
-      <src refid="unigraph.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.unigraph"/>
-    </javac2>
-    
-    <copy todir="${unigraph.output.dir}">
-      <fileset dir="${module.unigraph.basedir}/../Unigraph/src">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="compile.module.unigraph.tests" depends="register.custom.compilers,compile.module.unigraph.production" description="compile module Unigraph; test classes" unless="skip.tests"/>
-  
-  <target name="clean.module.unigraph" description="cleanup module">
-    <delete dir="${unigraph.output.dir}"/>
-    <delete dir="${unigraph.testoutput.dir}"/>
-  </target>
   
   
   <!-- Module Unidata -->
@@ -331,42 +134,24 @@
   
   <path id="unidata.module.production.classpath">
     <path refid="${module.jdk.classpath.unidata}"/>
-    <pathelement location="${uniwork.output.dir}"/>
-    <pathelement location="${unigraph.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   <path id="unidata.runtime.production.module.classpath">
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="uniwork.runtime.production.module.classpath"/>
-    <path refid="unigraph.runtime.production.module.classpath"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   <path id="unidata.module.classpath">
     <path refid="${module.jdk.classpath.unidata}"/>
     <pathelement location="${unidata.output.dir}"/>
-    <pathelement location="${uniwork.testoutput.dir}"/>
-    <pathelement location="${uniwork.output.dir}"/>
-    <pathelement location="${unigraph.testoutput.dir}"/>
-    <pathelement location="${unigraph.output.dir}"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   <path id="unidata.runtime.module.classpath">
     <pathelement location="${unidata.testoutput.dir}"/>
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="uniwork.runtime.module.classpath"/>
-    <path refid="unigraph.runtime.module.classpath"/>
-    <path refid="library.ant.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
-    <path refid="library.junit-4.12.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   
@@ -387,7 +172,7 @@
   
   <target name="compile.module.unidata" depends="compile.module.unidata.production,compile.module.unidata.tests" description="Compile module Unidata"/>
   
-  <target name="compile.module.unidata.production" depends="register.custom.compilers,compile.module.uniwork,compile.module.unigraph" description="Compile module Unidata; production classes">
+  <target name="compile.module.unidata.production" depends="register.custom.compilers" description="Compile module Unidata; production classes">
     <mkdir dir="${unidata.output.dir}"/>
     <javac2 destdir="${unidata.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.unidata}/javac">
       <compilerarg line="${compiler.args.unidata}"/>
@@ -416,9 +201,9 @@
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.uniwork, clean.module.unigraph, clean.module.unidata" description="cleanup all"/>
+  <target name="clean" depends="clean.module.unidata" description="cleanup all"/>
   
-  <target name="build.modules" depends="init, clean, compile.module.uniwork, compile.module.unigraph, compile.module.unidata" description="build all modules"/>
+  <target name="build.modules" depends="init, clean, compile.module.unidata" description="build all modules"/>
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
@@ -427,15 +212,11 @@
     <property name="temp.jar.path.Unidata.jar" value="${artifacts.temp.dir}/Unidata.jar"/>
   </target>
   
-  <target name="artifact.unidata:jar" depends="init.artifacts, compile.module.unidata, compile.module.uniwork" description="Build &#39;Unidata:jar&#39; artifact">
+  <target name="artifact.unidata:jar" depends="init.artifacts, compile.module.unidata" description="Build &#39;Unidata:jar&#39; artifact">
     <property name="artifact.temp.output.unidata:jar" value="${artifacts.temp.dir}/Unidata_jar"/>
     <mkdir dir="${artifact.temp.output.unidata:jar}"/>
     <jar destfile="${temp.jar.path.Unidata.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset dir="${unidata.output.dir}"/>
-      <zipfileset dir="${uniwork.output.dir}"/>
-      <zipfileset src="${idea.home}/lib/hamcrest-core-1.3.jar"/>
-      <zipfileset src="${idea.home}/lib/junit-4.12.jar"/>
-      <zipfileset src="${idea.home}/lib/ant/lib/ant.jar"/>
     </jar>
     <copy file="${temp.jar.path.Unidata.jar}" tofile="${artifact.temp.output.unidata:jar}/Unidata.jar"/>
   </target>
