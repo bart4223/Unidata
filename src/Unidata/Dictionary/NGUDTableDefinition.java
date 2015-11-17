@@ -53,6 +53,10 @@ public class NGUDTableDefinition extends NGObject {
         raiseFieldDefinitionAddedEvent(aFieldDefinition);
     }
 
+    public Integer getFieldDefinitionCount() {
+        return FFieldDefinitions.size();
+    }
+
     public void addEventListener(NGUDTableDefinitionEventListener aListener)  {
         FEventListeners.add(aListener);
     }
