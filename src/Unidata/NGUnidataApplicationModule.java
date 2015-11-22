@@ -11,7 +11,7 @@ import Uniwork.Misc.NGMisc;
 
 import java.util.Iterator;
 
-public class NGUnidataApplicationModule extends NGNonVisualApplicationModule implements NGUnidataAPI {
+public class NGUnidataApplicationModule extends NGNonVisualApplicationModule implements NGUnidataAPI, NGUnidataRuntimeAPI {
 
     protected NGUDDataDictionary FDataDictionary;
     protected NGUDDatabaseManager FDatabaseManager;
