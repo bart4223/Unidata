@@ -130,7 +130,7 @@
   <property name="module.jdk.bin.unidata" value="${project.jdk.bin}"/>
   <property name="module.jdk.classpath.unidata" value="${project.jdk.classpath}"/>
   
-  <property name="compiler.args.unidata" value="-encoding UTF-8 -source 1.6 -target 1.6 ${compiler.args}"/>
+  <property name="compiler.args.unidata" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
   
   <property name="unidata.output.dir" value="${module.unidata.basedir}/out/production/Unidata"/>
   <property name="unidata.testoutput.dir" value="${module.unidata.basedir}/out/test/Unidata"/>
