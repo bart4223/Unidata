@@ -2,13 +2,13 @@ package Unidata.Dictionary;
 
 import Uniwork.Base.NGObject;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NGUDTableSchema extends NGObject {
 
     protected String Name = "";
     protected String Caption = "";
-    protected ArrayList<NGUDTableFieldSchema> Fields;
+    protected CopyOnWriteArrayList<NGUDTableFieldSchema> Fields;
 
     public NGUDTableSchema() {
         super();
@@ -28,7 +28,7 @@ public class NGUDTableSchema extends NGObject {
         return Caption;
     }
 
-    public void setFields(ArrayList<NGUDTableFieldSchema> value) { Fields = value;}
-    public ArrayList<NGUDTableFieldSchema> getFields() { return Fields; }
+    public void setFields(CopyOnWriteArrayList<NGUDTableFieldSchema> value) { Fields = value;}
+    public CopyOnWriteArrayList<NGUDTableFieldSchema> getFields() { return Fields; }
 
 }

@@ -8,8 +8,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NGUDTable extends NGObject {
 
@@ -17,7 +17,7 @@ public class NGUDTable extends NGObject {
     protected String FFieldSeparator;
     protected String FName;
     protected String FCaption;
-    protected ArrayList<NGUDTableRecord> FRecords;
+    protected CopyOnWriteArrayList<NGUDTableRecord> FRecords;
     protected NGUDTableDefinition FDefinition;
     protected Boolean FLoaded;
 
@@ -34,7 +34,7 @@ public class NGUDTable extends NGObject {
         FDefinition = aDefinition;
         FName = aName;
         FCaption = aCaption;
-        FRecords = new ArrayList<>();
+        FRecords = new CopyOnWriteArrayList<>();
         FLoaded = false;
         FLineSeparator = "\n";
         FFieldSeparator = "";

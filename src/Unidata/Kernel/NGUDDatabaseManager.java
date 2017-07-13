@@ -4,13 +4,13 @@ import Unidata.Dictionary.NGUDTableDefinition;
 import Uniwork.Base.NGComponent;
 import Uniwork.Misc.NGMisc;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NGUDDatabaseManager extends NGComponent {
 
     protected NGUDDataDictionary FDataDictionary;
-    protected ArrayList<NGUDTable> FTables;
+    protected CopyOnWriteArrayList<NGUDTable> FTables;
     protected String FDatabasePath;
 
     protected String getFilename(String aName) {
@@ -74,7 +74,7 @@ public class NGUDDatabaseManager extends NGComponent {
 
     public NGUDDatabaseManager(NGComponent aOwner, String aName) {
         super(aOwner, aName);
-        FTables = new ArrayList<>();
+        FTables = new CopyOnWriteArrayList<>();
         FDataDictionary = null;
         FDatabasePath = "";
     }

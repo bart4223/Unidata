@@ -2,15 +2,15 @@ package Unidata.Dictionary;
 
 import Uniwork.Base.NGObject;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NGUDTableDefinition extends NGObject {
 
     protected String FName;
     protected String FCaption;
-    protected ArrayList<NGUDCustomTableFieldDefinition> FFieldDefinitions;
-    protected ArrayList<NGUDTableDefinitionEventListener> FEventListeners;
+    protected CopyOnWriteArrayList<NGUDCustomTableFieldDefinition> FFieldDefinitions;
+    protected CopyOnWriteArrayList<NGUDTableDefinitionEventListener> FEventListeners;
 
     protected synchronized void raiseFieldDefinitionAddedEvent(NGUDCustomTableFieldDefinition aFieldDefintion) {
         NGUDTableFieldDefinitionEvent event = new NGUDTableFieldDefinitionEvent(this, aFieldDefintion);
@@ -23,8 +23,8 @@ public class NGUDTableDefinition extends NGObject {
         super();
         FName = aName;
         FCaption = aCaption;
-        FFieldDefinitions = new ArrayList<>();
-        FEventListeners = new ArrayList<>();
+        FFieldDefinitions = new CopyOnWriteArrayList<>();
+        FEventListeners = new CopyOnWriteArrayList<>();
     }
 
     public String getName() {

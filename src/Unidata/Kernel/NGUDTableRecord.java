@@ -5,13 +5,13 @@ import Unidata.Dictionary.NGUDTableDefinition;
 import Uniwork.Base.NGObject;
 import Uniwork.Misc.NGStrings;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NGUDTableRecord extends NGObject {
 
     protected NGUDTableDefinition FDefinition;
-    protected ArrayList<NGUDCustomTableField> FFields;
+    protected CopyOnWriteArrayList<NGUDCustomTableField> FFields;
 
     protected void addField(NGUDCustomTableField aField) {
         FFields.add(aField);
@@ -33,7 +33,7 @@ public class NGUDTableRecord extends NGObject {
     public NGUDTableRecord(NGUDTableDefinition aDefinition) {
         super();
         FDefinition = aDefinition;
-        FFields = new ArrayList<>();
+        FFields = new CopyOnWriteArrayList<>();
         InitFields();
     }
 

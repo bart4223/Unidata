@@ -5,14 +5,14 @@ import Uniwork.Base.*;
 import Uniwork.Misc.NGMisc;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class NGUDDataDictionary extends NGComponent implements NGUDTableDefinitionEventListener {
 
-    protected ArrayList<NGUDTableDefinition> FTableDefinitions;
+    protected CopyOnWriteArrayList<NGUDTableDefinition> FTableDefinitions;
     protected String FDatabasePath;
-    protected ArrayList<NGUDDataDictionaryEventListener> FEventListeners;
+    protected CopyOnWriteArrayList<NGUDDataDictionaryEventListener> FEventListeners;
 
     protected void LoadDictionary() {
         File directory = new File(FDatabasePath);
@@ -39,8 +39,8 @@ public class NGUDDataDictionary extends NGComponent implements NGUDTableDefiniti
             NGUDTableSchema schema = new NGUDTableSchema();
             schema.setName(tableDef.getName());
             schema.setCaption(tableDef.getCaption());
-            schema.setFields(new ArrayList<NGUDTableFieldSchema>());
-            ArrayList<NGUDTableFieldSchema> fieldSchemas = schema.getFields();
+            schema.setFields(new CopyOnWriteArrayList<NGUDTableFieldSchema>());
+            CopyOnWriteArrayList<NGUDTableFieldSchema> fieldSchemas = schema.getFields();
             Iterator<NGUDCustomTableFieldDefinition> itr = tableDef.getFieldDefinitions();
             while (itr.hasNext()) {
                 NGUDCustomTableFieldDefinition fieldDef = itr.next();
@@ -96,8 +96,8 @@ public class NGUDDataDictionary extends NGComponent implements NGUDTableDefiniti
 
     public NGUDDataDictionary(NGComponent aOwner, String aName) {
         super(aOwner, aName);
-        FTableDefinitions = new ArrayList<>();
-        FEventListeners = new ArrayList<>();
+        FTableDefinitions = new CopyOnWriteArrayList<>();
+        FEventListeners = new CopyOnWriteArrayList<>();
         FDatabasePath = "";
     }
 
