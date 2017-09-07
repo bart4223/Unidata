@@ -255,6 +255,6 @@
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-  
-  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+
+  <target name="all" depends="build.modules, build.all.artifacts, testall" description="build all"/>
 </project>
