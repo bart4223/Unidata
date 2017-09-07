@@ -32,13 +32,13 @@
     <exclude name="**/vssver2.scc/**"/>
   </patternset>
   <patternset id="library.patterns">
-    <include name="*.war"/>
-    <include name="*.swc"/>
-    <include name="*.ane"/>
-    <include name="*.zip"/>
     <include name="*.egg"/>
     <include name="*.jar"/>
+    <include name="*.ane"/>
     <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.war"/>
+    <include name="*.zip"/>
   </patternset>
   <patternset id="compiler.resources">
     <exclude name="**/?*.java"/>
@@ -103,7 +103,7 @@
   </path>
   
   <path id="library.uniwork.classpath">
-    <pathelement location="${basedir}/../Uniwork/out/artifacts/Uniwork_jar/Uniwork.jar"/>
+    <pathelement location="${basedir}/../Uniwork/out/artifacts/Uniwork.jar"/>
   </path>
   <!-- Register Custom Compiler Taskdefs -->
   <property name="javac2.home" value="${idea.home}/lib"/>
@@ -141,32 +141,32 @@
   
   <path id="unidata.module.production.classpath">
     <path refid="${module.jdk.classpath.unidata}"/>
-    <path refid="library.uniwork.classpath"/>
     <path refid="library.junit-4.12.classpath"/>
     <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   <path id="unidata.runtime.production.module.classpath">
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="library.uniwork.classpath"/>
     <path refid="library.junit-4.12.classpath"/>
     <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   <path id="unidata.module.classpath">
     <path refid="${module.jdk.classpath.unidata}"/>
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="library.uniwork.classpath"/>
     <path refid="library.junit-4.12.classpath"/>
     <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   <path id="unidata.runtime.module.classpath">
     <pathelement location="${unidata.testoutput.dir}"/>
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="library.uniwork.classpath"/>
     <path refid="library.junit-4.12.classpath"/>
     <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.uniwork.classpath"/>
   </path>
   
   
@@ -222,30 +222,39 @@
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
-    <property name="artifact.output.unidata:jar" value="${basedir}/out/artifacts/Unidata_jar"/>
+    <property name="artifact.output.unidata.jar" value="${basedir}/out/artifacts"/>
     <mkdir dir="${artifacts.temp.dir}"/>
     <property name="temp.jar.path.Unidata.jar" value="${artifacts.temp.dir}/Unidata.jar"/>
   </target>
   
-  <target name="artifact.unidata:jar" depends="init.artifacts, compile.module.unidata" description="Build &#39;Unidata:jar&#39; artifact">
-    <property name="artifact.temp.output.unidata:jar" value="${artifacts.temp.dir}/Unidata_jar"/>
-    <mkdir dir="${artifact.temp.output.unidata:jar}"/>
+  <target name="artifact.unidata.jar" depends="init.artifacts, compile.module.unidata" description="Build &#39;Unidata.jar&#39; artifact">
+    <property name="artifact.temp.output.unidata.jar" value="${artifacts.temp.dir}/Unidata_jar"/>
+    <mkdir dir="${artifact.temp.output.unidata.jar}"/>
     <jar destfile="${temp.jar.path.Unidata.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
       <zipfileset dir="${unidata.output.dir}"/>
-      <zipfileset file="${basedir}/../Uniwork/out/artifacts/Uniwork_jar/Uniwork.jar"/>
     </jar>
-    <copy file="${temp.jar.path.Unidata.jar}" tofile="${artifact.temp.output.unidata:jar}/Unidata.jar"/>
+    <copy file="${temp.jar.path.Unidata.jar}" tofile="${artifact.temp.output.unidata.jar}/Unidata.jar"/>
   </target>
-  
-  <target name="build.all.artifacts" depends="artifact.unidata:jar" description="Build all artifacts">
-    <mkdir dir="${artifact.output.unidata:jar}"/>
-    <copy todir="${artifact.output.unidata:jar}">
-      <fileset dir="${artifact.temp.output.unidata:jar}"/>
+
+  <target name="testall" depends="artifact.unidata.jar" description="Perform Tests">
+    <java fork="true" classname="Unidata.Test.NGUGTestRunner">
+      <classpath>
+        <path refid="library.junit-4.12.classpath"/>
+        <path refid="library.hamcrest-core-1.3.classpath"/>
+        <path location="${basedir}/out/artifacts/Unidata.jar"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="build.all.artifacts" depends="artifact.unidata.jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.unidata.jar}"/>
+    <copy todir="${artifact.output.unidata.jar}">
+      <fileset dir="${artifact.temp.output.unidata.jar}"/>
     </copy>
     
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-  
-  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+
+  <target name="all" depends="build.modules, build.all.artifacts, testall" description="build all"/>
 </project>

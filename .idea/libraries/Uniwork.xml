@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Uniwork">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../Uniwork/out/artifacts/Uniwork_jar/Uniwork.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Uniwork/out/artifacts/Uniwork.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
