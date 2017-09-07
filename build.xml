@@ -237,7 +237,7 @@
   </target>
 
   <target name="testall" depends="artifact.unidata.jar" description="Perform Tests">
-    <java fork="true" classname="Unidata.Test.NGUGTestRunner">
+    <java fork="true" classname="Unidata.Test.NGUDTestRunner">
       <classpath>
         <path refid="library.junit-4.12.classpath"/>
         <path refid="library.hamcrest-core-1.3.classpath"/>
