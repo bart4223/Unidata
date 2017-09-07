@@ -95,11 +95,11 @@
   <!-- Project Libraries -->
   
   <path id="library.hamcrest-core-1.3.classpath">
-    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${basedir}/../libs/hamcrest-core-1.3.jar"/>
   </path>
   
   <path id="library.junit-4.12.classpath">
-    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+    <pathelement location="${basedir}/../libs/junit-4.12.jar"/>
   </path>
   
   <path id="library.uniwork.classpath">
@@ -141,32 +141,32 @@
   
   <path id="unidata.module.production.classpath">
     <path refid="${module.jdk.classpath.unidata}"/>
-    <path refid="library.junit-4.12.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
     <path refid="library.uniwork.classpath"/>
+    <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.junit-4.12.classpath"/>
   </path>
   
   <path id="unidata.runtime.production.module.classpath">
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="library.junit-4.12.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
     <path refid="library.uniwork.classpath"/>
+    <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.junit-4.12.classpath"/>
   </path>
   
   <path id="unidata.module.classpath">
     <path refid="${module.jdk.classpath.unidata}"/>
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="library.junit-4.12.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
     <path refid="library.uniwork.classpath"/>
+    <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.junit-4.12.classpath"/>
   </path>
   
   <path id="unidata.runtime.module.classpath">
     <pathelement location="${unidata.testoutput.dir}"/>
     <pathelement location="${unidata.output.dir}"/>
-    <path refid="library.junit-4.12.classpath"/>
-    <path refid="library.hamcrest-core-1.3.classpath"/>
     <path refid="library.uniwork.classpath"/>
+    <path refid="library.hamcrest-core-1.3.classpath"/>
+    <path refid="library.junit-4.12.classpath"/>
   </path>
   
   
@@ -255,6 +255,6 @@
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-
-  <target name="all" depends="build.modules, build.all.artifacts, testall" description="build all"/>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
 </project>
