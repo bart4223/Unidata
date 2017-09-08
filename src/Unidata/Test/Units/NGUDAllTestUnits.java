@@ -7,4 +7,5 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ NGUDTableDefinitionTest.class })
 
 public class NGUDAllTestUnits {
+
 }
